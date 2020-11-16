@@ -1,6 +1,11 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.io.File" %>
+<%@ page import="club.clubDAO" %>
+<%@ page import="FILE.FileDAO" %>
+<%@ page import="FILE.FileDTO" %>
 <%@ page import="BBS.BbsDAO" %>
 <%@ page import="BBS.Bbs" %>
 <%@ page import="java.util.ArrayList" %>
@@ -22,6 +27,17 @@
 </head>
 <body>
 	<%
+	String clubName=null;
+	if(session.getAttribute("clubName")==null){
+		
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("location.href = 'ClubMain.jsp'");
+		script.println("</script>");
+	}
+	else{
+		clubName=(String)session.getAttribute("clubName");
+		
 		String userID=null;
 	if(session.getAttribute("userID")!=null){
 		userID=(String)session.getAttribute("userID");
@@ -40,16 +56,18 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="main.jsp">학교 동아리 통합 사이트</a>
+			<a class="navbar-brand" href="ClubMain.jsp">학교 동아리 통합 사이트</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="main.jsp">메인</a></li> <%-- active접속페이지임을 보인다. --%>
+				<li><a href="main.jsp"><%=clubName %></a></li> <%-- active접속페이지임을 보인다. --%>
 				<li><a href="bbs.jsp">게시판</a></li>
 				<li class="active"><a href="file.jsp">파일</a></li>
 			</ul>
 			<%
-				if(userID == null){ //로그인되지 않은 경우
+			clubDAO ClubDAO = new clubDAO();
+			String check=ClubDAO.clubCmp(userID,clubName);
+			if(check == "NON"){ //로그인되지 않은 경우
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -78,15 +96,72 @@
 				</li>
 			</ul>
 			
-		</div>
-	</nav>
-			<div class="container">
-				<div></div>
-				<a href="fileUpload.jsp" type="submit" class="btn btn-primary pull-right">파일올리기</a>
-			</div>
 			<%
 				}
 			%>
+			
+		</div>
+	</nav>
+		
+	<div class="container">
+		<div class="row">
+			<table class="table table-striped"<%-- 홀짝 줄무늬 --%> style="text-align:center; border:1px solid #dddddd ">
+				<thead> <%--table의 제목부분 --%>
+					<tr>
+						<th colspan="3" style="background-color: #eeeeee; text-align:center;"><%=clubName %> 갤러리</th>
+					</tr>
+				</thead>
+				<tbody>
+				<%
+				String directory = application.getRealPath("/fileUpload/");
+				FileDAO fileDAO = new FileDAO();
+				ArrayList<FileDTO> fileList = fileDAO.Gallery(clubName);
+				
+				
+				for(int i = 0;i<fileList.size();i++){
+					%>
+					<tr>
+						<td colspan="2"></td>
+					</tr>
+					<tr>
+						<td style="width: 20%;">제목</td>
+						<td colspan="2"><%= fileList.get(i).getFileComment() %></td>
+					<tr>
+						<td>게시일자</td>
+						<td colspan="2"><%= fileList.get(i).getFileDate().substring(0,11)+fileList.get(i).getFileDate().substring(11,13)+"시"+fileList.get(i).getFileDate().substring(14,16)+"분" %></td>
+					</tr>
+					<tr>
+						<td colspan="2"><img src="fileUpload/<%=fileList.get(i).getFileRealName() %>" width="500" height="400" border="3"></td>
+					</tr>
+					<tr colspan="3">
+						<td colspan="2"></td>
+					</tr>
+					
+					<%
+					}
+				
+				}
+				%>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+			<%
+			clubDAO ClubDAO = new clubDAO();
+			String userID=(String)session.getAttribute("userID");
+			String check=ClubDAO.clubCmp(userID,clubName);
+			if(check != "NON"){ //로그인되지 않은 경우
+			%>
+			<div class="container">
+				
+				<a href="fileUpload.jsp" type="submit" class="btn btn-primary pull-right">파일올리기</a>
+			</div>
+			<%
+			}
+			%>
+			
+			
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

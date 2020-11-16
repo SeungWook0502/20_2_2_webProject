@@ -5,8 +5,16 @@ public class FileDTO {
 	String fileName;
 	String fileRealName;
 	String fileComment;
+	String clubName;
+	String fileDate;
 	
 	
+	public String getFileDate() {
+		return fileDate;
+	}
+	public void setFileDate(String fileDate) {
+		this.fileDate = fileDate;
+	}
 	public String getFileName() {
 		return fileName;
 	}
@@ -22,8 +30,14 @@ public class FileDTO {
 	public String getFileComment() {
 		return fileComment;
 	}
+	public String getClubName() {
+		return clubName;
+	}
+	public void setClubName(String clubName) {
+		this.clubName = clubName;
+	}
 	public void setFileComment(String fileComment) {
-		System.out.println(this.fileComment);
+		this.fileComment = fileComment;
 	}
 	
 	

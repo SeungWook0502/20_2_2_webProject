@@ -44,7 +44,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp"><%=clubName %></a></li> <%-- active접속페이지임을 보인다. --%>
 				<li class="active"><a href="bbs.jsp">게시판</a></li>
-				<li><a href="bbs.jsp">파일</a></li>
+				<li><a href="file.jsp">파일</a></li>
 			</ul>
 			
 			<%

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="club.clubDAO" %>
 <%@ page import="FILE.FileDAO" %>
 <%@ page import="FILE.FileDTO" %>
 <%@ page import="java.util.ArrayList" %>
@@ -21,6 +22,16 @@
 </head>
 <body>
 	<%
+	String clubName=null;
+	if(session.getAttribute("clubName")==null){
+		
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("location.href = 'ClubMain.jsp'");
+		script.println("</script>");
+	}
+	else{
+		clubName=(String)session.getAttribute("clubName");
 		String userID=null;
 	if(session.getAttribute("userID")!=null){
 		userID=(String)session.getAttribute("userID");
@@ -39,16 +50,18 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+			<a class="navbar-brand" href="ClubMain.jsp">학교 동아리 통합 사이트</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="main.jsp">메인</a></li> <%-- active접속페이지임을 보인다. --%>
+				<li><a href="main.jsp"><%=clubName %></a></li> <%-- active접속페이지임을 보인다. --%>
 				<li><a href="bbs.jsp">게시판</a></li>
 				<li class="active"><a href="file.jsp">파일</a></li>
 			</ul>
 			<%
-				if(userID == null){ //로그인되지 않은 경우
+			clubDAO ClubDAO = new clubDAO();
+			String check=ClubDAO.clubCmp(userID,clubName);
+			if(check == "NON"){ //로그인되지 않은 경우
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -71,6 +84,7 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">회원관리<span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="myPage.jsp">내 정보</a></li>
 						<li><a href="logoutAction.jsp">로그아웃</a></li>
 					</ul>
 				</li>
@@ -82,15 +96,19 @@
 			
 			
 			<form action="fileUploadAction.jsp" method="post" enctype="multipart/form-data">
-				File : <input type="file" name="file"><br>
 				<div class="form-group">
-					<input type="text" placeholder="코멘트" name="fileComment" maxlength="100">
+					<input type="text" placeholder="제목" name="fileComment" maxlength="100">
 				</div>
+				File : <input type="file" name="file"><br>
+				
 				<div class="form-group">
 				<input type="submit" class="btn btn-primary pull-center" value="업로드"><br>
 				</div>
 			</form>
 		</div>
+		<%
+			}
+		%>
 		<%
 			}
 		%>

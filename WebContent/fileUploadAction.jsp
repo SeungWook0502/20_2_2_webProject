@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ page import="club.clubDAO" %>
    <%@ page import="FILE.FileDAO" %>
    <%@ page import="java.io.File" %>
    <%@ page import="java.io.PrintWriter" %>
@@ -18,13 +19,25 @@
 </head>
 <body>
 	<%
-				
+
+	String clubName=null;
+	if(session.getAttribute("clubName")==null){
+		
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("location.href = 'ClubMain.jsp'");
+		script.println("</script>");
+	}
+	else{
+		clubName=(String)session.getAttribute("clubName");
 
 	String userID =null;
 	if(session.getAttribute("userID") != null) {
 		userID = (String)session.getAttribute("userID");
 	}
-	if(userID == null){	//로그인되어있어야 작성이 가능하다.
+	clubDAO ClubDAO = new clubDAO();
+	String check=ClubDAO.clubCmp(userID,clubName);
+	if(check == "NON"){ //로그인되지 않은 경우
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인을 하세요.')");
@@ -42,8 +55,7 @@
 			String fileName = multipartRequest.getOriginalFileName("file");
 			String fileRealName = multipartRequest.getFilesystemName("file");
 			String fileComment = multipartRequest.getParameter("fileComment");
-			System.out.println(fileComment);
-			new FileDAO().upload(fileName,fileRealName,fileComment);
+			new FileDAO().upload(fileName,fileRealName,fileComment,clubName);
 			
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -51,6 +63,7 @@
 			script.println("location.href='file.jsp'");
 			script.println("</script>");
 		
+	}
 	}
 	%>
 	
