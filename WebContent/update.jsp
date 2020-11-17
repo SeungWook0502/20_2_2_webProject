@@ -3,6 +3,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="BBS.Bbs" %>
 <%@ page import="BBS.BbsDAO" %>
+<%@ page import="club.clubDAO" %>
 <%@ page import="user.UserDAO" %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,16 @@
 </head>
 <body>
 	<%
+	String clubName=null;
+	if(session.getAttribute("clubName")==null){
+		
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("location.href = 'ClubMain.jsp'");
+		script.println("</script>");
+	}
+	else{
+		clubName=(String)session.getAttribute("clubName");
 		String userID=null;
 	if(session.getAttribute("userID")!=null){
 		userID=(String)session.getAttribute("userID");
@@ -63,9 +74,11 @@
 				<li class="active"><a href="bbs.jsp">게시판</a></li>
 				<li><a href="file.jsp">갤러리</a></li>
 				<%
+				clubDAO ClubDAO = new clubDAO();
+				String check=ClubDAO.clubCmp(userID,clubName);
 				UserDAO userDAO = new UserDAO();
 				int userAdmin=Integer.parseInt(userDAO.searchAdmin(userID));
-				if(userID != null && userAdmin == 1){
+				if(userID != null && userAdmin == 1&&check!="NON"){
 				%>
 				<li><a href="ControlUser.jsp">관리</a></li>
 				<%	

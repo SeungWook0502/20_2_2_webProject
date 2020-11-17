@@ -123,7 +123,7 @@
 						<%
 						if(userID.equals(list.get(i).getUserID())){
 						%>
-						<td><a href="myPage.jsp">내 정보</a></td>
+						<td><a href="myPage.jsp">내 정보 변경하기</a></td>
 						<%
 						}else {
 						%>

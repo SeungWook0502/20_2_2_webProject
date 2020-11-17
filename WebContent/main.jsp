@@ -49,9 +49,11 @@
 				<li><a href="bbs.jsp">게시판</a></li>
 				<li><a href="file.jsp">갤러리</a></li>
 				<%
+				clubDAO ClubDAO = new clubDAO();
+				String check=ClubDAO.clubCmp(userID,clubName);
 				UserDAO userDAO = new UserDAO();
 				int userAdmin=Integer.parseInt(userDAO.searchAdmin(userID));
-				if(userID != null && userAdmin == 1){
+				if(userID != null && userAdmin == 1&&check!="NON"){
 				%>
 				<li><a href="ControlUser.jsp">관리</a></li>
 				<%	
@@ -59,9 +61,7 @@
 				%>
 			</ul>
 			<%
-				clubDAO ClubDAO = new clubDAO();
-				String check=ClubDAO.clubCmp(userID,clubName);
-				if(check == "NON"){ //로그인되지 않은 경우
+			if(check == "NON"){ //로그인되지 않은 경우
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
