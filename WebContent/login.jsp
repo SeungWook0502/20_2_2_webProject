@@ -38,7 +38,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp"><%=clubName %></a></li>
 				<li><a href="bbs.jsp">게시판</a></li>
-				<li><a href="file.jsp">파일</a></li>
+				<li><a href="file.jsp">갤러리</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">

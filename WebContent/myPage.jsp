@@ -48,7 +48,16 @@
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp"><%=clubName %></a></li> <%-- active접속페이지임을 보인다. --%>
 				<li><a href="bbs.jsp">게시판</a></li>
-				<li><a href="file.jsp">파일</a></li>
+				<li><a href="file.jsp">갤러리</a></li>
+				<%
+				UserDAO userDAO = new UserDAO();
+				int userAdmin=Integer.parseInt(userDAO.searchAdmin(userID));
+				if(userID != null && userAdmin == 1){
+				%>
+				<li><a href="ControlUser.jsp">관리</a></li>
+				<%	
+				}
+				%>
 			</ul>
 			<%
 				clubDAO ClubDAO = new clubDAO();
@@ -84,7 +93,6 @@
 		</div>
 	</nav>
 			<%
-			UserDAO userDAO = new UserDAO();
 			ArrayList<User> list = userDAO.getUserPage(userID);
 			User user= list.get(0);
 			%>
@@ -165,6 +173,9 @@
 						<a href="main.jsp" type="submit" class="btn btn-primary form-control" value="취소">취소</a>
 				</div>
 			</form>
+			<from method="post" action="withDrawAction.jsp">
+				<a onclick="return confirm('정말로 탈퇴하시겠습니까?')" href="withDrawAction.jsp" type="submit" class="btn btn-primary form-control" value="탈퇴">회원탈퇴</a>
+			</from>
 		</div>
 		<div class="col-lg-4"></div>
 			<%

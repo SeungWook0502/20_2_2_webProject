@@ -6,6 +6,7 @@
 <%@ page import="club.clubDAO" %>
 <%@ page import="FILE.FileDAO" %>
 <%@ page import="FILE.FileDTO" %>
+<%@ page import="user.UserDAO" %>
 <%@ page import="BBS.BbsDAO" %>
 <%@ page import="BBS.Bbs" %>
 <%@ page import="java.util.ArrayList" %>
@@ -62,7 +63,16 @@
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp"><%=clubName %></a></li> <%-- active접속페이지임을 보인다. --%>
 				<li><a href="bbs.jsp">게시판</a></li>
-				<li class="active"><a href="file.jsp">파일</a></li>
+				<li class="active"><a href="file.jsp">갤러리</a></li>
+				<%
+				UserDAO userDAO = new UserDAO();
+				int userAdmin=Integer.parseInt(userDAO.searchAdmin(userID));
+				if(userID != null && userAdmin == 1){
+				%>
+				<li><a href="ControlUser.jsp">관리</a></li>
+				<%	
+				}
+				%>
 			</ul>
 			<%
 			clubDAO ClubDAO = new clubDAO();

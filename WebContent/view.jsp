@@ -61,7 +61,16 @@
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp"><%=clubName %></a></li> <%-- active접속페이지임을 보인다. --%>
 				<li class="active"><a href="bbs.jsp">게시판</a></li>
-				<li><a href="file.jsp">파일</a></li>
+				<li><a href="file.jsp">갤러리</a></li>
+				<%
+				UserDAO userDAO = new UserDAO();
+				int userAdmin=Integer.parseInt(userDAO.searchAdmin(userID));
+				if(userID != null && userAdmin == 1){
+				%>
+				<li><a href="ControlUser.jsp">관리</a></li>
+				<%	
+				}
+				%>
 			</ul>
 			<%
 			clubDAO ClubDAO = new clubDAO();
@@ -81,7 +90,6 @@
 			</ul>
 			<%
 				}else {				//로그인 되어있는 경우
-					UserDAO userDAO = new UserDAO();
 			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#" >사용자ID : <%= userID %></a></li>
@@ -130,8 +138,7 @@
 			</table>
 			<a href="bbs.jsp" class="btn btn-primary">목록</a>
 			<%
-			UserDAO userDAO = new UserDAO();
-			int userAdmin=Integer.parseInt(userDAO.searchAdmin(userID));
+			userAdmin=Integer.parseInt(userDAO.searchAdmin(userID));
 				if(userID != null && userAdmin == 1){	
 						if(userID.equals(bbs.getUserID())){
 			%>

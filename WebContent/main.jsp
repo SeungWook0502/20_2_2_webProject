@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="club.clubDAO" %>
+<%@ page import="user.UserDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,16 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="main.jsp"><%=clubName %></a></li> <%-- active접속페이지임을 보인다. --%>
 				<li><a href="bbs.jsp">게시판</a></li>
-				<li><a href="file.jsp">파일</a></li>
+				<li><a href="file.jsp">갤러리</a></li>
+				<%
+				UserDAO userDAO = new UserDAO();
+				int userAdmin=Integer.parseInt(userDAO.searchAdmin(userID));
+				if(userID != null && userAdmin == 1){
+				%>
+				<li><a href="ControlUser.jsp">관리</a></li>
+				<%	
+				}
+				%>
 			</ul>
 			<%
 				clubDAO ClubDAO = new clubDAO();

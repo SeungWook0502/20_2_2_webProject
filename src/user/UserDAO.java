@@ -131,6 +131,30 @@ public class UserDAO {
 		}
 		return list; //DB오류
 	}
+	public ArrayList<User> getControlPage(String clubName){
+		String SQL = "SELECT * FROM USER WHERE clubName = ?";
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setNString(1, clubName);
+			rs=pstmt.executeQuery();
+			
+			while (rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserPassword(rs.getString(2));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserEmail(rs.getString(5));
+				user.setUserPhone(rs.getString(6));
+				user.setUserAdmin(rs.getString(7));
+				list.add(user);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list; //DB오류
+	}
 	
 	public int reJoin(User user) {
 		String SQL = "update USER set userPassword=?, userName=?, userGender=?, userEmail=?, userPhone=?, userAdmin=? where userID = ?";
@@ -144,6 +168,20 @@ public class UserDAO {
 			pstmt.setNString(5, user.getUserPhone());
 			pstmt.setNString(6, user.getUserAdmin());
 			pstmt.setNString(7, user.getUserID());
+			return pstmt.executeUpdate(); //0이상의 값이 반환되기 때문에 성공적으로 리턴한다.
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;	//DB오류
+		
+	}
+	public int withDraw(String userID,String clubName) {
+		String SQL = "delete from user where userID = ? and clubName = ?";
+		try {
+
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setNString(1, userID);
+			pstmt.setNString(2, clubName);
 			return pstmt.executeUpdate(); //0이상의 값이 반환되기 때문에 성공적으로 리턴한다.
 		}catch(Exception e) {
 			e.printStackTrace();

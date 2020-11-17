@@ -38,7 +38,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp"><%=clubName %></a></li>
 				<li><a href="bbs.jsp">게시판</a></li>
-				<li><a href="file.jsp">파일</a></li>
+				<li><a href="file.jsp">갤러리</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -90,10 +90,10 @@
 				<div class="form-group" style="text-align: center;">
 					<div class="btn btn-group" data-toggle="buttons">
 						<label class="btn btn-primary active"> <%-- active는 default값 설정 --%>
-							<input type="radio" name="userAdmin" autocomplete="off" value="사용자" checked>사용자
+							<input type="radio" name="userAdmin" autocomplete="off" value="0" checked>사용자
 						</label>
 						<label class="btn btn-primary">
-							<input type="radio" name="userAdmin" autocomplete="off" value="관리자" checked>관리자
+							<input type="radio" name="userAdmin" autocomplete="off" value="1" checked>관리자
 						</label>
 					</div>
 				</div>
