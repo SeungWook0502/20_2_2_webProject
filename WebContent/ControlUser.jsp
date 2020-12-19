@@ -94,6 +94,12 @@
 	
 	<div class="container">
 		<div class="row">
+			<% 
+			UserDAO userDAO = new UserDAO();
+			%>
+			<div>
+				동아리원 수 : <%= userDAO.userCount(clubName) %>
+			</div>
 			<table class="table table-striped"<%-- 홀짝 줄무늬 --%> style="text-align:center; border:1px solid #dddddd ">
 				<thead> <%--table의 제목부분 --%>
 					<tr>
@@ -109,7 +115,6 @@
 				</thead>
 				<tbody>
 					<%
-						UserDAO userDAO = new UserDAO();
 						ArrayList<User> list = userDAO.getControlPage(clubName);
 						for(int i = 0;i<list.size();i++){
 					%>
@@ -121,15 +126,15 @@
 						<td><%= list.get(i).getUserEmail() %></td>
 						<td><%= list.get(i).getUserPhone() %></td>
 						<%
-						if(userID.equals(list.get(i).getUserID())){
+							if(userID.equals(list.get(i).getUserID())){
 						%>
 						<td><a href="myPage.jsp">내 정보 변경하기</a></td>
 						<%
-						}else {
+							}else {
 						%>
 						<td><a href="remoteWithDrawAction.jsp?ControlUserID=<%= list.get(i).getUserID() %>">탈퇴시키기</a></td>
 						<%
-						}
+							}
 						%>
 					</tr>
 					<%

@@ -90,4 +90,17 @@ public class FileDAO {
 		return fileList;
 		
 	}
+	public int delete(String fileRealName) {
+		String SQL = "delete from file where fileRealName = ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setNString(1, fileRealName);
+			return pstmt.executeUpdate(); //0이상의 값이 반환되기 때문에 성공적으로 리턴한다.
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;	//DB오류
+		
+	}
 }

@@ -114,7 +114,7 @@
 						<td><input type="text" class="form-control" placeholder="글제목" name="bbsTitle" maxlegth="50" value="<%=bbs.getBbsTitle()%>"></td>
 					</tr>
 					<tr>
-						<td><textarea class="form-control" placeholder="글제목" name="bbsContent" maxlegth="2048" style="height:350px;"><%= bbs.getBbsContent()%></textarea></td>
+						<td><textarea class="form-control" placeholder="글제목" name="bbsContent" maxlegth="2048" style="height:350px;"><%=bbs.getBbsContent()%></textarea></td>
 					</tr>
 				</tbody>
 			</table>
@@ -122,6 +122,9 @@
 		</form>
 		</div>
 	</div>
+				<%	
+				}
+				%>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

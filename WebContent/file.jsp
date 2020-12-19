@@ -130,27 +130,32 @@
 				
 				for(int i = 0;i<fileList.size();i++){
 					%>
-					<tr>
-						<td colspan="2"></td>
-					</tr>
-					<tr>
-						<td style="width: 20%;">제목</td>
-						<td colspan="2"><%= fileList.get(i).getFileComment() %></td>
-					<tr>
-						<td>게시일자</td>
-						<td colspan="2"><%= fileList.get(i).getFileDate().substring(0,11)+fileList.get(i).getFileDate().substring(11,13)+"시"+fileList.get(i).getFileDate().substring(14,16)+"분" %></td>
-					</tr>
-					<tr>
-						<td colspan="2"><img src="fileUpload/<%=fileList.get(i).getFileRealName() %>" width="500" height="400" border="3"></td>
-					</tr>
-					<tr colspan="3">
-						<td colspan="2"></td>
-					</tr>
 					
+						<tr>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td style="width: 20%;">제목</td>
+							<td colspan="2"><%= fileList.get(i).getFileComment() %></td>
+						<tr>
+							<td>게시일자</td>
+							<td colspan="2"><%= fileList.get(i).getFileDate().substring(0,11)+fileList.get(i).getFileDate().substring(11,13)+"시"+fileList.get(i).getFileDate().substring(14,16)+"분" %></td>
+						</tr>
+						<tr>
+							<td colspan="2"><img src="fileUpload/<%=fileList.get(i).getFileRealName() %>" width="500" height="400" border="3"></td>
+						</tr>
 					<%
+					if(userID != null && userAdmin == 1&&check!="NON"){
+						%>
+						<tr colspan="3">
+							<td><a onclick="return confirm('정말로 삭제하시겠습니까?')" href = fileDeleteAction.jsp?fileRealName=<%=fileList.get(i).getFileRealName()%> class="btn btn-primary form-control">삭제</a></td>
+						</tr>
+						<%
+						System.out.println(fileList.get(i).getFileRealName());
+						}
 					}
 				
-				}
+	}
 				%>
 				</tbody>
 			</table>

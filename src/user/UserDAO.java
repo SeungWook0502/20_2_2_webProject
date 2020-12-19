@@ -131,6 +131,7 @@ public class UserDAO {
 		}
 		return list; //DB오류
 	}
+	
 	public ArrayList<User> getControlPage(String clubName){
 		String SQL = "SELECT * FROM USER WHERE clubName = ?";
 		ArrayList<User> list = new ArrayList<User>();
@@ -188,5 +189,23 @@ public class UserDAO {
 		}
 		return -1;	//DB오류
 		
+	}
+	
+	public String userCount(String clubName) { //해킹을 막기위해 DB에서 Direct로 가져오는 방식
+		String SQL = "select count(userID) from user where clubName = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setNString(1, clubName);
+			rs=pstmt.executeQuery(); //결과를 담을 수 있는 하나으 객체
+			if(rs.next()) {			//ID가 있는경우
+				return rs.getString(1); //로그인 성공
+			}
+			return "-1"; //아이디가 없음
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "-2";
 	}
 }

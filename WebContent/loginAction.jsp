@@ -34,11 +34,19 @@
 		UserDAO userDAO = new UserDAO();
 		int result = userDAO.login(user.getUserID(), user.getUserPassword(),clubName);
 		if(result==1){
-			session.setAttribute("userID",user.getUserID());
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("location.href = 'main.jsp'");
-			script.println("</script>");
+			if(clubName!="ClubMain"){
+				session.setAttribute("userID",user.getUserID());
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("location.href = 'main.jsp'");
+				script.println("</script>");
+			}else{
+				session.setAttribute("userID",user.getUserID());
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("location.href = 'ClubMain.jsp'");
+				script.println("</script>");
+			}
 		}
 		else if(result==0){
 			PrintWriter script = response.getWriter();

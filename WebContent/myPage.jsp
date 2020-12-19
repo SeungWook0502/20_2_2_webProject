@@ -141,7 +141,7 @@
 					<input type="email" class="form-control" placeholder="이메일" name="userEmail" maxlength="20" value="<%=user.getUserEmail() %>">
 				</div>
 				<div class="form-group">
-					<input type="tel" class="form-control" placeholder="전화번호" name="userPhone"placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlenght="20" value="<%=user.getUserPhone() %>">
+					<input type="tel" class="form-control" placeholder="전화번호" name="userPhone" maxlenght="20" value="<%=user.getUserPhone() %>">
 				</div>
 				<div class="form-group" style="text-align: center;">
 					<div class="btn btn-group" data-toggle="buttons">

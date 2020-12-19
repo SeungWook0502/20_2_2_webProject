@@ -76,4 +76,18 @@ public class clubDAO {
 		}
 		return "NON";
 	}
+	
+	public int removeClub(String clubName) {
+		String SQL = "delete from club where clubName = ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setNString(1, clubName);
+			return pstmt.executeUpdate(); //0이상의 값이 반환되기 때문에 성공적으로 리턴한다.
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;	//DB오류
+		
+	}
 }

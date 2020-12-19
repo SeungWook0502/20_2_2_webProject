@@ -36,9 +36,11 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
+				<% if(clubName!="ClubMain"){ %>
 				<li><a href="main.jsp"><%=clubName %></a></li>
-				<li><a href="bbs.jsp">게시판</a></li>
-				<li><a href="file.jsp">갤러리</a></li>
+					<li><a href="bbs.jsp">게시판</a></li>
+					<li><a href="file.jsp">갤러리</a></li>
+				<%} %>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -46,8 +48,10 @@
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">접속하기<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li class="active"><a href="login.jsp">로그인</a></li>
-						<li><a href="join.jsp">회원가입</a></li>
+						<li class="active"><a href="login.jsp">로그인</a></li>		
+						<% if(clubName!="ClubMain"){ %>
+							<li><a href="join.jsp">회원가입</a></li>
+						<%} %>
 					</ul>
 				</li>
 			</ul>

@@ -74,10 +74,10 @@
 				<div class="form-group" style="text-align: center;">
 					<div class="btn btn-group" data-toggle="buttons">
 						<label class="btn btn-primary active"> <%-- active는 default값 설정 --%>
-							<input type="radio" name="userGender" autocomplete="off" value="0" checked>남자
+							<input type="radio" name="userGender" autocomplete="off" value="남자" checked>남자
 						</label>
 						<label class="btn btn-primary">
-							<input type="radio" name="userGender" autocomplete="off" value="1" checked>여자
+							<input type="radio" name="userGender" autocomplete="off" value="여자" checked>여자
 						</label>
 					</div>
 				</div>
@@ -85,7 +85,7 @@
 					<input type="email" class="form-control" placeholder="이메일" name="userEmail" maxlength="20">
 				</div>
 				<div class="form-group">
-					<input type="tel" class="form-control" placeholder="전화번호" name="userPhone"placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlenght="20">
+					<input type="tel" class="form-control" placeholder="전화번호" name="userPhone" maxlenght="20">
 				</div>
 				<div class="form-group" style="text-align: center;">
 					<div class="btn btn-group" data-toggle="buttons">

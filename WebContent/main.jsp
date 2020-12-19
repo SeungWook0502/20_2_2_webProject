@@ -113,23 +113,17 @@
 			<div class="carousel-inner">
 				<div class="item active">
 					<span>
-					<img src="images/1.jpg">
-					<img src="images/2.jpg">
-					<img src="fileUpload/github참석.png" width="500" height="200" border="3">
+					<img src="images/1.jpg" width="1200" height="550" border="3">
 					</span>
 				</div>
 				<div class="item">
 				<span>
-					<img src="images/2.jpg">
-					<img src="images/3.jpg">
-					<img src="images/1.jpg">
+					<img src="images/2.jpg" width="1200" height="550" border="3">
 					</span>
 				</div>
 				<div class="item">
 				<span>
-					<img src="images/3.jpg">
-					<img src="images/1.jpg">
-					<img src="images/2.jpg">
+					<img src="images/3.jpg" width="1200" height="550" border="3">
 					</span>
 				</div>
 			</div>

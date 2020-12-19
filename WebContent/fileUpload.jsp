@@ -72,6 +72,7 @@
 			</ul>
 			<%
 			if(check == "NON"){ //로그인되지 않은 경우
+				%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"
@@ -117,9 +118,7 @@
 		</div>
 		<%
 			}
-		%>
-		<%
-			}
+		}
 		%>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
